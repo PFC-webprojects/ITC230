@@ -1,0 +1,18 @@
+{
+    "name": "ListManager",
+    "version": "1.0.0",
+    "keywords": [
+        "ITC 230",
+        "Week 1 - Node.js up and running"
+    ],
+    "author": "Peter Caliandro",
+    "contributors": [],
+    "dependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PFC-webprojects/ITC230"
+    },
+    "scripts": {
+        "start": "node index.js"
+    }
+}
