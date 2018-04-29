@@ -1,18 +1,30 @@
 {
-    "name": "ListManager",
-    "version": "1.0.0",
-    "keywords": [
-        "ITC 230",
-        "Week 1 - Node.js up and running"
-    ],
-    "author": "Peter Caliandro",
-    "contributors": [],
-    "dependencies": {},
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/PFC-webprojects/ITC230"
-    },
-    "scripts": {
-        "start": "node index.js"
-    }
+  "name": "list_manager",
+  "version": "2.0.0",
+  "keywords": [
+    "ITC 230",
+    "Week 2 - Let's get modular"
+  ],
+  "author": "Peter Caliandro",
+  "contributors": [],
+  "dependencies": {
+    "http-status-codes": "^1.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PFC-webprojects/ITC230.git"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/PFC-webprojects/ITC230/issues"
+  },
+  "homepage": "https://github.com/PFC-webprojects/ITC230#readme",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "license": "ISC",
+  "description": ""
 }
