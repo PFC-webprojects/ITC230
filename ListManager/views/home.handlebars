@@ -1,0 +1,18 @@
+        <main>
+            <form action="/detail" method="post">
+                <label for="name_input">Name:</label>
+                <input name="name" id="name" type="search" autofocus="autofocus" required />
+                <input type="submit" value="Search" />
+            </form>
+            
+            <br />
+            <hr />
+
+            <form action="/detail" method="get">
+                <ol>
+                {{#each skiAreas}}
+                    <li><a href="/detail?name={{skiAreas}}{{SearchString}}">{{skiAreas}}{{Name}}</a></li>
+                {{/each}}
+                </ol>
+            </form>
+        </main>

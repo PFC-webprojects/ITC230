@@ -1,0 +1,46 @@
+        <main>
+        {{#if skiArea}}
+            <table>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>{{skiArea.Name}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Region</th>
+                    <td>{{skiArea.Region}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Country</th>
+                    <td>{{skiArea.Country}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Latitude</th>
+                    <td>{{skiArea.Latitude}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Top</th>
+                    <td>{{skiArea.Top}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Base</th>
+                    <td>{{skiArea.Base}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Website</th>
+                    <td><a href="{{skiArea.Website}}" target="_blank">{{skiArea.Website}}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">Article</th>
+                    <td><a href="{{skiArea.Article}}" target="_blank">{{skiArea.Article}}</a></td>
+                </tr>
+            </table>
+
+            <br />
+
+            <form action="/delete" method="post">
+                <button type="submit" name="name" value="{{skiArea.Name}}">Delete <i>{{skiArea.Name}}</i></button>
+            </form>
+        {{else}}
+            <p>No ski area by the name of <i>{{searchName}}</i> was found in our database.</p>
+        {{/if}}
+        </main>

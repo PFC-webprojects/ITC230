@@ -1,4 +1,4 @@
-/*  Week 2 - Let's get modular
+/*  Week 3 - Express Yourself
  *  skiareas.js
  *  Peter Caliandro
  *  ITC 230, Spring 2018
@@ -35,7 +35,7 @@ Sky Resort	Bogd Khan Mountain	Mongolia	48	1570	1379	http://www.skyresort.mn/page
 //  (It was simply copied from an Excel worksheet left over from a previous web development school project.)
 
 
-let skiArea = function(  //  This function creates a SkiArea object from a set of parameters.
+let skiArea = (  //  This function creates a SkiArea object from a set of parameters.
         name,  //  name is the only required parameter.  It will also be used later on as a unique key in the skiAreas array.
         region = "",
         country = "",
@@ -44,16 +44,17 @@ let skiArea = function(  //  This function creates a SkiArea object from a set o
         base = NaN,  //  and misleading in this context.
         website = "",
         article = ""
-    ){
+    ) => {
     return {
-        "Name"     : name,
-        "Region"   : region,
-        "Country"  : country,
-        "Latitude" : latitude,
-        "Top"      : top,
-        "Base"     : base,
-        "Website"  : website,
-        "Article"  : article
+        Name         : name,
+        SearchString : encodeURIComponent(name),
+        Region       : region,
+        Country      : country,
+        Latitude     : latitude,
+        Top          : top,
+        Base         : base,
+        Website      : website,
+        Article      : article
     };
 };
 
@@ -70,23 +71,24 @@ let skiAreas = source.split("\n").map(row => {
                  columns[0] ,
                  columns[1] ,
                  columns[2] ,
-        parseInt(columns[3]),
+                 columns[3] ,
         parseInt(columns[4]),
         parseInt(columns[5]),
-                 columns[6] ,
-                 columns[7]
+        parseInt(columns[6]),
+                 columns[7] ,
+                 columns[8]
     );
 });
 
 
-exports.getAll = function() {  //  Return the entire skiAreas array, sorted by name.
+exports.getAll  =  () => {  //  Return the entire skiAreas array, sorted by name.
     return skiAreas.sort((first, second) =>
         first.Name.localeCompare(second.Name)
     );
 };
 
 
-exports.get = function(name) {  //  Return one skiArea object.  Search for it by name.
+exports.get  =  (name) => {  //  Return one skiArea object.  Search for it by name.
     if (!name) {  //  In case an empty string is passed as a parameter . . .
         return undefined;  //  A return value of undefined means that no skiArea was found.
     }
@@ -98,7 +100,7 @@ exports.get = function(name) {  //  Return one skiArea object.  Search for it by
 };
 
 
-exports.delete = function(name) {  //  It is assumed that name will be a string.
+exports.delete  =  (name) => {  //  It is assumed that name will be a string.
     if (!name) {  //  In case an empty string is passed . . .
         return undefined;  //  A return value of undefined means that no skiArea was found.
     }
@@ -110,15 +112,14 @@ exports.delete = function(name) {  //  It is assumed that name will be a string.
     if (index === -1) {  //  Not found; return a value to indicate that.
         return undefined;
     } else {  //  Found.  Delete the object from the array.  Return that object to the caller.
-        return skiAreas.splice(index, 1);
+        return skiAreas.splice(index, 1)[0];
     }
-    
 };
 
 
 //  If it is not already in the skiAreas array, create a new skiArea from the given parameters, and add it to skiAreas.
 //  Return the new skiArea object -- but if name is already in skiAreas, then don't create any new object; return undefined instead.
-exports.add = function(
+exports.add  = (
         name,
         region = "",
         country = "",
@@ -127,7 +128,7 @@ exports.add = function(
         base = NaN,
         website = "",
         article = ""
-    ) {
+    ) => {
     if (exports.get(name)) {  //  then a ski area with the name name is already in the skiAreas array.
         return undefined;  //  to indicate that we will not be adding this ski area a second time.
     }
