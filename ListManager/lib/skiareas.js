@@ -1,4 +1,4 @@
-/*  Week 3 - Express Yourself
+/*  Week 4 - Quality Matters
  *  skiareas.js
  *  Peter Caliandro
  *  ITC 230, Spring 2018
@@ -71,12 +71,11 @@ let skiAreas = source.split("\n").map(row => {
                  columns[0] ,
                  columns[1] ,
                  columns[2] ,
-                 columns[3] ,
+        parseInt(columns[3]),
         parseInt(columns[4]),
         parseInt(columns[5]),
-        parseInt(columns[6]),
-                 columns[7] ,
-                 columns[8]
+                 columns[6] ,
+                 columns[7]
     );
 });
 
@@ -117,33 +116,24 @@ exports.delete  =  (name) => {  //  It is assumed that name will be a string.
 };
 
 
-//  If it is not already in the skiAreas array, create a new skiArea from the given parameters, and add it to skiAreas.
-//  Return the new skiArea object -- but if name is already in skiAreas, then don't create any new object; return undefined instead.
-exports.add  = (
-        name,
-        region = "",
-        country = "",
-        latitude = NaN,
-        top = NaN,
-        base = NaN,
-        website = "",
-        article = ""
-    ) => {
-    if (exports.get(name)) {  //  then a ski area with the name name is already in the skiAreas array.
+//  If it is not already in the skiAreas array, create a new skiArea from the given parameter, and add it to skiAreas.
+//  Return the new skiArea object -- but if a ski area with the same name is already in skiAreas, then don't create any new object; instead, return undefined.
+exports.add  =  (skiAreaInput) => {
+    if (exports.get(skiAreaInput.name)) {  //  then a ski area with the name name is already in the skiAreas array.
         return undefined;  //  to indicate that we will not be adding this ski area a second time.
     }
     
     let newSkiArea = skiArea(
-        name,
-        region,
-        country,
-        parseInt(latitude),
-        parseInt(top),
-        parseInt(base),
-        website,
-        article
+        skiAreaInput.name,
+        skiAreaInput.region,
+        skiAreaInput.country,
+        parseInt(skiAreaInput.latitude),
+        parseInt(skiAreaInput.top),
+        parseInt(skiAreaInput.base),
+        skiAreaInput.website,
+        skiAreaInput.article
     );
     skiAreas.push(newSkiArea);
-    
+
     return newSkiArea;  //  to confirm that this new skiArea has been added to the skiAreas array.
 };

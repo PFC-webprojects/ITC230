@@ -1,9 +1,9 @@
 {
   "name": "list_manager",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "keywords": [
     "ITC 230",
-    "Week 3 - Express Yourself"
+    "Week 4 - Quality Assurance"
   ],
   "author": "Peter Caliandro",
   "contributors": [],
@@ -18,7 +18,9 @@
     "url": "git+https://github.com/PFC-webprojects/ITC230.git"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint **/*.js --ignore-pattern node_modules/",
+    "test": "mocha"
   },
   "bugs": {
     "url": "https://github.com/PFC-webprojects/ITC230/issues"
@@ -29,5 +31,10 @@
     "lib": "lib"
   },
   "license": "ISC",
-  "description": ""
+  "description": "Ongoing project for ITC 230",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "mocha": "^5.2.0"
+  }
 }

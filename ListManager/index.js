@@ -1,4 +1,4 @@
-/*  Week 3 - Express Yourself
+/*  Week 4 - Quality Matters
  *  index.js
  *  Peter Caliandro
  *  ITC 230, Spring 2018
@@ -10,18 +10,18 @@
 
 const express     = require("express");
 const handlebars  = require("express3-handlebars").create({defaultLayout : "main"});
-const httpStatus  = require("http-status-codes");
+//const httpStatus  = require("http-status-codes");
 
 const skiAreas    = require("./lib/skiareas");  //  This module was custom-built for this project.
 
-const NOT_FOUND_1   = " was not found.\n\n\n";
-const NOT_FOUND_2   = "Make sure that you enter all applicable query terms, " +
-                      "that you spell everything correctly, " +
-                      "and that you apply the correct separators between terms.\n\n" +
-                      "Also note that all field names must be entered " +
-                      "in all lowercase letters.";
-const NO_NEW        = "No new ski area has been added.\n\n";
-const DETAILS       = "with the following details:\n\n";
+//const NOT_FOUND_1   = " was not found.\n\n\n";
+//const NOT_FOUND_2   = "Make sure that you enter all applicable query terms, " +
+//                      "that you spell everything correctly, " +
+//                      "and that you apply the correct separators between terms.\n\n" +
+//                      "Also note that all field names must be entered " +
+//                      "in all lowercase letters.";
+//const NO_NEW        = "No new ski area has been added.\n\n";
+//const DETAILS       = "with the following details:\n\n";
 
 let app = express();
 app.set("port", process.env.PORT || 3000);
@@ -70,46 +70,47 @@ app.post("/delete", (req, res) => {
     });
 });
 
-app.get("/add", (req, res) => {
-    res.type("text/plain");
-    if (req.query.name === undefined) {
-        res.status(httpStatus.BAD_REQUEST);
-        res.send("A name field must be included in the query string.\n" +
-            NO_NEW + NOT_FOUND_2);
-    } else {
-        let addedSkiArea = skiAreas.add(
-            req.query.name,
-            req.query.region,
-            req.query.country,
-            req.query.latitude,
-            req.query.top,
-            req.query.base,
-            req.query.website,
-            req.query.article
-        );
-        if (addedSkiArea === undefined) {
-            res.status(httpStatus.BAD_REQUEST);
-            res.send("The ski area " + req.query.name +
-                " is already in the list, " + DETAILS +
-                JSON.stringify(skiAreas.get(req.query.name)) +
-                "\n\n" + NO_NEW);
-        } else {
-            res.send("The ski area " + req.query.name +
-                " has been added, " + DETAILS + JSON.stringify(addedSkiArea));
-        }
-    }
-});
+//  Note:  This route was added as extra credit for a previous assignment
+//app.get("/add", (req, res) => {
+//    res.type("text/plain");
+//    if (req.query.name === undefined) {
+//        res.status(httpStatus.BAD_REQUEST);
+//        res.send("A name field must be included in the query string.\n" +
+//            NO_NEW + NOT_FOUND_2);
+//    } else {
+//        let addedSkiArea = skiAreas.add(
+//            req.query.name,
+//            req.query.region,
+//            req.query.country,
+//            req.query.latitude,
+//            req.query.top,
+//            req.query.base,
+//            req.query.website,
+//            req.query.article
+//        );
+//        if (addedSkiArea === undefined) {
+//            res.status(httpStatus.BAD_REQUEST);
+//            res.send("The ski area " + req.query.name +
+//                " is already in the list, " + DETAILS +
+//                JSON.stringify(skiAreas.get(req.query.name)) +
+//                "\n\n" + NO_NEW);
+//        } else {
+//            res.send("The ski area " + req.query.name +
+//                " has been added, " + DETAILS + JSON.stringify(addedSkiArea));
+//        }
+//    }
+//});
 
 app.get("/about", (req, res) => {
     res.render("about");
 });
 
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404);
     res.render("404");
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     console.error(err.stack);
     res.status(500);
     res.render("500");
