@@ -1,6 +1,6 @@
         <main>
         {{#if skiArea}}
-            <p>The ski area <i>{{skiArea.Name}}</i> was deleted from the database.&nbsp; {{skiAreaCount}} ski areas remain.</p>
+            <p>The ski area <i>{{skiArea.Name}}</i> was deleted from the database.&nbsp; {{skiAreasRemaining}}.</p>
         {{else}}
             <p>No ski area by the name of <i>{{searchName}}</i> was found in our database.</p>
         {{/if}}
