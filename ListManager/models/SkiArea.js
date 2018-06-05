@@ -1,4 +1,4 @@
-/*  Week 5 - Database Integration
+/*  Week 6 - REST API's
  *  SkiArea.js
  *  Peter Caliandro
  *  ITC 230, Spring 2018

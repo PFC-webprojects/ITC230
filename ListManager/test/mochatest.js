@@ -1,4 +1,4 @@
-/*  Week 4 - Quality Matters
+/*  Week 6 - REST API's
  *  mochatest.js
  *  Peter Caliandro
  *  ITC 230, Spring 2018

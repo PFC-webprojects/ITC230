@@ -1,4 +1,4 @@
-/*  Week 5 - Database Integration
+/*  Week 6 - REST API's
  *  skiareas.js
  *  Peter Caliandro
  *  ITC 230, Spring 2018
@@ -16,12 +16,39 @@ const SkiAreas = require("../models/SkiArea.js");
 /*  Return the entire collection of SkiArea objects currently stored in the
  *  database as an array.
  */
-exports.getAll  =  () => {
-    return SkiAreas.find({}, (err, allSkiAreas) => {
+exports.getAll  =  (callback) => {
+    SkiAreas.find({}, (err, allSkiAreas) => {
         if (err) {
             return err;
         }
-        return allSkiAreas;
+
+        allSkiAreas.sort((firstSkiArea, secondSkiArea) => {
+            let first  = firstSkiArea.Name.toLowerCase();
+            let second = secondSkiArea.Name.toLowerCase();
+            if (first < second) {
+                return -1;
+            } else if (second < first) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+        
+        allSkiAreas  =  allSkiAreas.map((skiArea) => {
+            return {
+                Name         : skiArea.Name,
+                SearchString : skiArea.SearchString,
+                Region       : skiArea.Region,
+                Country      : skiArea.Country,
+                Latitude     : skiArea.Latitude,
+                Top          : skiArea.Top,
+                Base         : skiArea.Base,
+                Website      : skiArea.Website,
+                Article      : skiArea.Article
+            };  //  in other words, don't send back to the client unnecessary properties such as _id
+        });
+        
+        callback(allSkiAreas);
     });
 };
 
@@ -45,7 +72,7 @@ exports.find  =  (name) => {
  *  with newSkiArea.  If one is not found, then add newSkiArea to the database.
  */
 exports.addOrUpdate  = (newSkiArea) => {
-    newSkiArea.SearchString = encodeURIComponent(newSkiArea.Name);
+    newSkiArea.SearchString = encodeURIComponent(newSkiArea.Name);  //  Add one more property to the newSkiArea object.
     
     SkiAreas.findOneAndUpdate(
         SkiAreas.find({Name : {$regex : new RegExp(`^${newSkiArea.Name}$`, "i")}}),  //  This expression returns a Query object
